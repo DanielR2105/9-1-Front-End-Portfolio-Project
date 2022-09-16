@@ -14,6 +14,9 @@ function renderSearch(results) {
     const purchaseLink = document.createElement("a")
     const bookImage = document.createElement("img")
     const primaryBook = document.createElement("section")
+    bookDescription.id = "book-description"
+    primaryBook.id = "primary-book"
+    showMore.id = "show-more"
 
     if (!results.items[0].volumeInfo.imageLinks) {
         bookImage.src = "https://cdn.pixabay.com/photo/2014/04/02/14/06/book-306178__340.png"      
@@ -69,8 +72,8 @@ function renderSearch(results) {
         bookDescription,
         showMore,
         purchaseLink,
-        renderSimilarBooks(results.items)
     )
+    main.append(renderSimilarBooks(results.items))
     return primaryBook
 }
 
@@ -91,6 +94,7 @@ function renderSimilarBook(book) {
     const similarBookTitle = document.createElement("h4")
     const similarDiv = document.createElement("div")
     const similarBookAuthor = document.createElement("h5")
+    similarDiv.id = "similar-book"
 
     similarBookTitle.innerHTML = book.volumeInfo.title
     similarBookTitle.id = "similar_titles"
@@ -126,6 +130,7 @@ function renderSimilarBook(book) {
 
 function renderSimilarBooks(books) {
     const similarSection = document.createElement("section")
+    similarSection.id = "similar-section"
     for (let i = 1; i < books.length; i++) {
         similarSection.append(renderSimilarBook(books[i]))
     }
@@ -136,6 +141,7 @@ function clearPage() {
     while(bookDetails.children.length > 0) {
         bookDetails.children[0].remove()
     }
+
 }
 
 function makeFetchCall(search) {
@@ -146,16 +152,21 @@ function makeFetchCall(search) {
     })
 }
 
+window.addEventListener('load', (event) => {
+    makeFetchCall("Gardens of the moon")
+  });
+
 searchForm.addEventListener("submit", (event) => {
     event.preventDefault()
     clearPage()
+    const similarSection = document.querySelector("#similar-section")
     const searchQuery = document.querySelector("#search").value
     if (searchQuery === "") {
         bookDetails.append(errorHandling())
+        similarSection.style.display = "none"
     } else {
     makeFetchCall(searchQuery)
     searchForm.reset()
     }
 })
 
-makeFetchCall("Gardens of the Moon")

@@ -1,0 +1,47 @@
+html {
+    background: url("https://wallpaperaccess.com/full/2862101.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #D17E3D;
+}
+
+main {
+    text-align: center;
+    width: 40%;
+    margin: 0 auto;
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+    display: block;
+}
+
+header img {
+    width: 75px;
+    height: auto;
+    display: inline;
+}
+
+header h1 {
+    display: inline;
+    font-size: xxx-large;
+}
+
+a {
+    color: white;
+}
+
+p {
+    background-color:rgba(41, 24, 12, 0.9);
+    padding: 10px;
+    font-size: large;
+}
+
+@media (max-width: 1015px) {
+
+    img {
+      width: 80%;
+      height: auto;
+    }
+  
+  }

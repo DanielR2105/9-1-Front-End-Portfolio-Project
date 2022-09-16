@@ -1,0 +1,109 @@
+html {
+    background: url("https://wallpaperaccess.com/full/2862101.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+main {
+    text-align: center;
+    color: #C2A156;
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+    display: block;
+    color: #D17E3D;
+}
+
+header img {
+    width: 75px;
+    height: auto;
+    display: inline;
+}
+
+header h1 {
+    display: inline;
+    font-size: xxx-large;
+}
+
+a {
+    color: white;
+}
+
+#similar-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#similar-book {
+    background: url("https://media.istockphoto.com/photos/antique-leather-book-cover-picture-id173946498?k=20&m=173946498&s=612x612&w=0&h=Aexzkkd0JS5hZLvF2dfLWOTxPoeu2e-pYjtagNCqTzc=") no-repeat center;
+    background-size: 300px auto;
+    margin: 10px;
+    color: #C2A156;
+    transition: all .2s ease-in-out;
+}
+
+#similar-book:hover {
+    transform: scale(1.1);
+}
+
+#similar-book h4:hover,
+#similar-book h5:hover {
+    cursor: pointer;
+    color: #E2D7BB;
+}
+
+#primary-book {
+    color: #D17E3D;
+}
+
+#primary-book p {
+    width: 40%;
+    margin: 0 auto;
+    font-weight: 800;
+    background-color:rgba(41, 24, 12, 0.9);
+    padding: 10px;
+    font-size: large;
+}
+
+#primary-book img {
+    width: 25%;
+    height: auto;
+}
+
+h2 {
+    font-size: xx-large;
+}
+
+h5,
+#view-book {
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+#show-more:hover {
+    cursor: pointer;
+    text-decoration: underline;
+} 
+
+@media (max-width: 1100px) {
+
+    #similar-section {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+  }
+  @media (max-width: 730px) {
+
+    #primary-book img {
+      width: 50%;
+      height: auto;
+    }
+  
+  }
+ @media (max-width: 600px) {
+
+    #similar-section {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  
+  }
