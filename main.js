@@ -15,27 +15,39 @@ function renderSearch(results) {
     const bookImage = document.createElement("img")
     const primaryBook = document.createElement("section")
 
-    bookImage.src= results.items[0].volumeInfo.imageLinks.thumbnail
+    if (!results.items[0].volumeInfo.imageLinks) {
+        bookImage.src = "https://cdn.pixabay.com/photo/2014/04/02/14/06/book-306178__340.png"      
+    } else {
+        bookImage.src = results.items[0].volumeInfo.imageLinks.thumbnail
+    }
     bookImage.alt = "Thumbnail"
 
     author.innerHTML = `Written by ${results.items[0].volumeInfo.authors}`
     bookTitle.innerHTML = results.items[0].volumeInfo.title
     publishedDate.innerHTML = `Published on ${results.items[0].volumeInfo.publishedDate}`
+    if (!results.items[0].searchInfo) {
+        snippet.innerHTML = "No book snippet available"
+    } else {
     snippet.innerHTML = results.items[0].searchInfo.textSnippet
+    }
+    if (!results.items[0].volumeInfo.description){
+        bookDescription.innerHTML = "No book description available"
+    } else {
     bookDescription.innerHTML = results.items[0].volumeInfo.description
+    }
     bookDescription.style.display = "none"
-    showMore.innerHTML = "Show more"
+    showMore.innerHTML = "Show description"
 
     showMore.addEventListener("click", (event) => {
         event.preventDefault()
         if (bookDescription.style.display === "none") {
             bookDescription.style.display = "block"
             snippet.style.display = "none"
-            showMore.innerHTML = "Show less"
+            showMore.innerHTML = "Hide description"
         } else {
             bookDescription.style.display = "none"
             snippet.style.display = "block"
-            showMore.innerHTML = "Show more"
+            showMore.innerHTML = "Show description"
         }
     })
 
@@ -60,6 +72,18 @@ function renderSearch(results) {
         renderSimilarBooks(results.items)
     )
     return primaryBook
+}
+
+function errorHandling() {
+   const parentDiv = document.createElement("div")
+   parentDiv.id = "wrapper"
+   const boxDiv = document.createElement("div")
+   boxDiv.id = "box"
+   const boxHeading = document.createElement("h5")
+   boxHeading.innerHTML = "Please type something into the search bar"
+   boxDiv.append(boxHeading)
+   parentDiv.append(boxDiv)
+   return parentDiv
 }
 
 function renderSimilarBook(book) {
@@ -126,6 +150,12 @@ searchForm.addEventListener("submit", (event) => {
     event.preventDefault()
     clearPage()
     const searchQuery = document.querySelector("#search").value
+    if (searchQuery === "") {
+        bookDetails.append(errorHandling())
+    } else {
     makeFetchCall(searchQuery)
     searchForm.reset()
+    }
 })
+
+makeFetchCall("Gardens of the Moon")
